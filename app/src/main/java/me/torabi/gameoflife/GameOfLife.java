@@ -14,7 +14,7 @@ public class GameOfLife extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        canvasView = new CanvasView(this);
+        canvasView = new CanvasView(this, game);
         canvasView.update_numbers(game.init(100, 100));
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
