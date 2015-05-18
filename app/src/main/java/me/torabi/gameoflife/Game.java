@@ -29,16 +29,7 @@ public class Game {
                 }
             }
         }
-        if (nums[i][j]) {
-            if(live_neighbors < 2)
-                return false;
-            if(live_neighbors > 3)
-                return false;
-        } else {
-            if(live_neighbors == 3)
-                return true;
-        }
-        return nums[i][j];
+        return (live_neighbors == 3) | ((live_neighbors == 2) & nums[i][j]) ;
     }
 
     public boolean[][] init(int width, int height) {
