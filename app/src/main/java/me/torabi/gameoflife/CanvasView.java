@@ -50,7 +50,7 @@ public class CanvasView  extends View {
         paint.setTextSize(text_size);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setStrokeWidth(1);
-        canvas.drawRect(new RectF(left-10,top-10,left+10+ side_count *side_length, top+10+ side_count *side_length), paint);
+        canvas.drawRect(new RectF(left - 10, top - 10, left + 10 + side_count * side_length, top + 10 + side_count * side_length), paint);
         for (int i=0; i< side_count; i++) {
             for (int j = 0; j < side_count; j++) {
                 if (numbers[i][j]) {
