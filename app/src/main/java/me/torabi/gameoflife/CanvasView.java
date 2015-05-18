@@ -58,7 +58,7 @@ public class CanvasView  extends View {
                 } else {
                     paint.setColor(Color.YELLOW);
                 }
-                canvas.drawRect(new RectF(left + side_length * i + 10, top + side_length * j + 10, left + side_length + side_length * i - 10, top + side_length + side_length * j - 10), paint);
+                canvas.drawRect(new RectF(left + side_length * i, top + side_length * j, left + side_length + side_length * i, top + side_length + side_length * j), paint);
             }
         }
     }
