@@ -17,14 +17,14 @@ public class CanvasView  extends View {
     private int parentWidth;
     private int parentHeight;
 
-    protected int[][] numbers = null;
+    protected boolean[][] numbers = null;
 
     public CanvasView(Context context) {
         super(context);
         paint = new Paint();
     }
 
-    public void update_numbers(int[][] _numbers){
+    public void update_numbers(boolean[][] _numbers){
         numbers = _numbers;
         invalidate();
     }
@@ -36,20 +36,31 @@ public class CanvasView  extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    int side_count = 100;
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.YELLOW);
-        int side = (int)((parentHeight>parentWidth? parentWidth: parentHeight)/6);
-        int left = (parentWidth - side*4)/2;
-        int top = (parentHeight- side*4)/2;
-        paint.setColor(Color.MAGENTA);
-        float text_size_dip = side/2;
+        canvas.drawColor(Color.LTGRAY);
+        int side_length = (int)((parentHeight>parentWidth? parentWidth: parentHeight)/(side_count+1));
+        int left = (parentWidth - side_length* side_count)/2;
+        int top = (parentHeight- side_length* side_count)/2;
+        paint.setColor(Color.BLACK);
+        float text_size_dip = side_length/2;
         final float scale = getContext().getResources().getDisplayMetrics().density;
         int text_size = (int) (text_size_dip * scale + 0.5f);
         paint.setTextSize(text_size);
         paint.setTextAlign(Paint.Align.CENTER);
-
-        canvas.drawRoundRect(new RectF(left-10,top-10,left+10+4*side, top+10+4*side), 10, 10, paint);
+        paint.setStrokeWidth(1);
+        canvas.drawRect(new RectF(left-10,top-10,left+10+ side_count *side_length, top+10+ side_count *side_length), paint);
+        for (int i=0; i< side_count; i++) {
+            for (int j = 0; j < side_count; j++) {
+                if (numbers[i][j]) {
+                    paint.setColor(Color.BLUE);
+                } else {
+                    paint.setColor(Color.YELLOW);
+                }
+                canvas.drawRect(new RectF(left + side_length * i + 10, top + side_length * j + 10, left + side_length + side_length * i - 10, top + side_length + side_length * j - 10), paint);
+            }
+        }
     }
 }
 

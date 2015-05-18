@@ -6,14 +6,19 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.Random;
+
 public class GameOfLife extends Activity {
 
     private Game game = new Game();
+    private boolean[][] numbers = new boolean[100][100];
+    private CanvasView canvasView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CanvasView canvasView = new CanvasView(this);
+        canvasView = new CanvasView(this);
+        canvasView.update_numbers(numbers);
         setContentView(canvasView);
     }
 
@@ -29,7 +34,14 @@ public class GameOfLife extends Activity {
         @Override
         public void run() {
             game.next();
-            delayedRun(500000);
+            Random rand = new Random(System.currentTimeMillis());
+            for(int i=0; i<numbers.length; i++) {
+                for (int j=0; j<numbers[i].length; j++) {
+                    numbers[i][j] = rand.nextBoolean();
+                }
+            }
+            canvasView.update_numbers(numbers);
+            delayedRun(500);
         }
     };
 
